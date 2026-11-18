@@ -1,0 +1,10 @@
+"use client";
+
+import { AppShell } from "@/components/AppShell";
+import { useTheme } from "@/contexts/ThemeContext";
+import { Monitor, Moon, Sun } from "lucide-react";
+
+export default function SettingsPage() {
+  const { theme, setTheme } = useTheme();
+  return <AppShell title="Configurações" subtitle="Preferências do sistema"><div className="max-w-3xl"><h1 className="text-2xl font-bold">Preferências visuais</h1><p className="mt-1 text-sm text-slate-500">Sua escolha será aplicada em todas as páginas.</p><section className="mt-6 rounded-2xl border border-slate-200/80 bg-white p-5 dark:border-slate-800 dark:bg-slate-900"><h2 className="font-semibold">Tema da interface</h2><div className="mt-4 grid gap-3 sm:grid-cols-2">{[{ value: "light" as const, label: "Modo claro", icon: Sun }, { value: "dark" as const, label: "Modo escuro", icon: Moon }].map((item) => { const Icon = item.icon; const active = theme === item.value; return <button key={item.value} onClick={() => setTheme(item.value)} className={`flex items-center gap-3 rounded-xl border p-4 text-left transition ${active ? "border-indigo-500 bg-indigo-50 ring-2 ring-indigo-500/10 dark:bg-indigo-500/10" : "border-slate-200 hover:border-slate-300 dark:border-slate-800"}`}><div className={`grid h-10 w-10 place-items-center rounded-lg ${active ? "bg-indigo-600 text-white" : "bg-slate-100 text-slate-600 dark:bg-slate-800"}`}><Icon size={19} /></div><div><p className="font-semibold">{item.label}</p><p className="mt-0.5 text-xs text-slate-500">Aplicação global</p></div></button>; })}</div></section><section className="mt-4 flex items-start gap-3 rounded-2xl border border-slate-200/80 bg-white p-5 dark:border-slate-800 dark:bg-slate-900"><Monitor className="mt-0.5 text-slate-500" size={20}/><div><h2 className="font-semibold">Responsividade</h2><p className="mt-1 text-sm leading-6 text-slate-500">O sistema adapta automaticamente menus, tabelas e formulários para celular, tablet e computador.</p></div></section></div></AppShell>;
+}
